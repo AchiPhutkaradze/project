@@ -1,0 +1,183 @@
+:root {
+  --trans: color 0.4s ease 0s;
+  --bg-scrl: 34, 34, 34;
+  --alpha-bg-scrl: 0.95;
+  --bg-main: rgb(43, 43, 43);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  list-style-type: none;
+  overflow: hidden;
+  background-color: rgba(
+    var(--bg-scrl, var(--color_11)),
+    var(--alpha-bg-scrl, 1)
+  );
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 69px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+}
+
+#burger-menu {
+  cursor: pointer;
+  height: 27px;
+  width: 27px;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+
+  span,
+  span:before,
+  span:after {
+    background: #fff;
+    display: block;
+    height: 2px;
+    opacity: 1;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+    content: "";
+  }
+
+  /* TOP */
+  span:before {
+    left: 0px;
+    top: -10px;
+    width: 13px;
+    height: 3px;
+  }
+
+  /* MIDDLE */
+  span {
+    right: 0px;
+    height: 3px;
+    top: 13px;
+    width: 26px;
+  }
+
+  /* BOTTOM */
+  span:after {
+    right: 0px;
+    top: 10px;
+    width: 13px;
+    height: 3px;
+  }
+
+  &.close {
+    /* TOP */
+    span:before {
+      top: 0px;
+      transform: rotate(90deg);
+      width: 27px;
+    }
+
+    /* MIDDLE */
+    span {
+      transform: rotate(-45deg);
+      top: 13px;
+      width: 27px;
+    }
+
+    /* BOTTOM */
+    span:after {
+      top: 0px;
+      left: 0;
+      transform: rotate(90deg);
+      opacity: 0;
+      width: 0;
+    }
+  }
+}
+
+#menu {
+  z-index: 1;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  right: -100%; /* Start off-screen to the left */
+  width: 50%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  text-align: center;
+  padding-top: 20px;
+  transition: all 0.5s ease-in-out;
+
+  &.overlay {
+    right: 0; /* Move to the visible area */
+    visibility: visible;
+    opacity: 1;
+    width: 251px;
+    padding-top: 100px;
+    background: rgb(34, 34, 34);
+    --screen-width: 100vw;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-decoration: none;
+  }
+}
+
+.site-logo {
+  position: relative;
+}
+
+#tbc-logo {
+  cursor: pointer;
+  width: 130px;
+  height: 29px;
+}
+
+#tbc-usaid-link {
+  color: rgb(0, 163, 224);
+}
+
+main {
+  margin-top: 69px;
+  position: relative;
+  background-color: var(--bg-main);
+}
+
+#people {
+  width: 100%;
+  height: 217px;
+}
+
+.title-div {
+  position: absolute;
+  top: 32px;
+  left: 20px;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 24px;
+  color: #f4f4f4;
+  line-height: 38.4px;
+}
