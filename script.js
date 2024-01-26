@@ -7,6 +7,11 @@ let slidesLength = slides.length;
 let radioContainer = document.getElementById("radio-container");
 let autoPlay;
 let count = 0;
+const questionBox = document.querySelectorAll(".question-box");
+const answers = Array.from(document.getElementsByClassName("answer"));
+const arrowDownImg = Array.from(document.getElementsByClassName("arrow-down"));
+
+console.log(arrowDownImg);
 //menu
 burgerMenu.addEventListener("click", function () {
   const isClosed = burgerMenu.classList.contains("close");
@@ -60,11 +65,20 @@ startAutoPlay();
 slider.addEventListener("mouseenter", stopAutoPlay);
 slider.addEventListener("mouseleave", startAutoPlay);
 
-//fac
-
-const box = document.getElementById("question-box");
-console.log(box);
-
-box.addEventListener("click", () => {
-  console.log(true);
-});
+//fac accordion
+for (let i = 0; i < questionBox.length; i++) {
+  questionBox[i].addEventListener("click", function () {
+    answers[i].classList.toggle("active");
+    if (answers[i].classList.contains("active")) {
+      arrowDownImg[i].style.transform = "rotate(180deg)";
+    } else {
+      arrowDownImg[i].style.transform = "rotate(0)";
+    }
+    for (let j = 0; j < answers.length; j++) {
+      if (j !== i) {
+        answers[j].classList.remove("active");
+        arrowDownImg[j].style.transform = "rotate(0)";
+      }
+    }
+  });
+}

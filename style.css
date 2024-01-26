@@ -160,7 +160,7 @@ main {
   position: relative;
   background-color: var(--bg-main);
   overflow: hidden;
-  z-index: -1;
+  /* z-index: -1;  */
 }
 
 #people {
@@ -405,6 +405,7 @@ h2 {
   line-height: 2;
   font-size: 20px;
   display: none;
+  transition: 0.5s ease;
 }
 #advice {
   line-height: 2;
@@ -426,16 +427,24 @@ hr {
 .question-1 {
   padding: 0px 117px 0 0;
 }
-.answer-2 {
-  display: none;
-}
-.answer-3 {
-  display: none;
-}
 
 .all-question {
   margin-top: 50px;
   color: #00aeef;
   display: flex;
-  align-items: center;
+  justify-content: center;
+}
+.answer.active {
+  display: block;
+  transition: 0.5s ease;
+}
+.arrow-down {
+  transition: 0.5s ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+.question-box span {
+  transition: 0.5s ease-in-out;
 }
