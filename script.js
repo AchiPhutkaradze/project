@@ -1,7 +1,6 @@
 const burgerMenu = document.getElementById("burger-menu");
 const overlay = document.getElementById("menu");
 const main = document.querySelector("main");
-console.log(main);
 const slider = document.getElementById("slider");
 const slides = document.querySelectorAll(".slide");
 let slidesLength = slides.length;
@@ -15,12 +14,10 @@ burgerMenu.addEventListener("click", function () {
   if (isClosed) {
     burgerMenu.classList.remove("close");
     overlay.classList.remove("overlay");
-    overlay.style.position = "";
     main.style.position = "";
   } else {
     burgerMenu.classList.add("close");
     overlay.classList.add("overlay");
-    overlay.style.position = "absolute";
     main.style.position = "fixed";
   }
 });
@@ -62,3 +59,12 @@ startAutoPlay();
 
 slider.addEventListener("mouseenter", stopAutoPlay);
 slider.addEventListener("mouseleave", startAutoPlay);
+
+//fac
+
+const box = document.getElementById("question-box");
+console.log(box);
+
+box.addEventListener("click", () => {
+  console.log(true);
+});

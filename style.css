@@ -40,7 +40,7 @@ header {
   width: 27px;
   overflow: visible;
   position: relative;
-  z-index: 3;
+  z-index: 2;
 
   span,
   span:before,
@@ -100,7 +100,7 @@ header {
 }
 
 #menu {
-  z-index: 2;
+  z-index: 1;
   min-height: 100%;
   position: fixed;
   top: 0;
@@ -160,7 +160,7 @@ main {
   position: relative;
   background-color: var(--bg-main);
   overflow: hidden;
-  z-index: 1;
+  z-index: -1;
 }
 
 #people {
@@ -367,4 +367,75 @@ h2 {
 .third-child {
   display: flex;
   justify-content: center;
+}
+
+/* fac accordion */
+
+.questions-div {
+  padding: 50px 20px 40px;
+  background-color: #000000;
+}
+
+.fac-list {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.question-box {
+  display: flex;
+  justify-content: space-between;
+}
+.fac-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: rgb(244, 244, 244);
+}
+.stages {
+  margin-left: 1.5em;
+  padding-top: 35px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  line-height: 2;
+  font-size: 20px;
+}
+.answer {
+  line-height: 2;
+  font-size: 20px;
+  display: none;
+}
+#advice {
+  line-height: 2;
+  padding: 20px;
+}
+
+h4 {
+  color: rgb(244, 244, 244);
+  line-height: 1.2em;
+  font-size: 20px;
+}
+
+hr {
+  width: 100%;
+  color: #252323;
+  background-color: #252323;
+  height: 1px;
+}
+.question-1 {
+  padding: 0px 117px 0 0;
+}
+.answer-2 {
+  display: none;
+}
+.answer-3 {
+  display: none;
+}
+
+.all-question {
+  margin-top: 50px;
+  color: #00aeef;
+  display: flex;
+  align-items: center;
 }
