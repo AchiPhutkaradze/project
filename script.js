@@ -10,6 +10,8 @@ let count = 0;
 const questionBox = document.querySelectorAll(".question-box");
 const answers = Array.from(document.getElementsByClassName("answer"));
 const arrowDownImg = Array.from(document.getElementsByClassName("arrow-down"));
+const footer = document.querySelector("footer");
+const body = document.getElementsByTagName("BODY")[0];
 
 console.log(arrowDownImg);
 //menu
@@ -19,11 +21,15 @@ burgerMenu.addEventListener("click", function () {
   if (isClosed) {
     burgerMenu.classList.remove("close");
     overlay.classList.remove("overlay");
-    main.style.position = "";
+    main.style.zIndex = "";
+    footer.style.zIndex = "";
+    body.style.position = "";
   } else {
     burgerMenu.classList.add("close");
     overlay.classList.add("overlay");
-    main.style.position = "fixed";
+    main.style.zIndex = "-1";
+    footer.style.zIndex = "-2";
+    body.style.position = "fixed";
   }
 });
 
