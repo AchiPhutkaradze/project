@@ -12,8 +12,9 @@ const answers = Array.from(document.getElementsByClassName("answer"));
 const arrowDownImg = Array.from(document.getElementsByClassName("arrow-down"));
 const footer = document.querySelector("footer");
 const body = document.getElementsByTagName("BODY")[0];
+const header = document.querySelector("header");
+const fullscreen = document.getElementById("fullscreen");
 
-console.log(arrowDownImg);
 //menu
 burgerMenu.addEventListener("click", function () {
   const isClosed = burgerMenu.classList.contains("close");
@@ -23,13 +24,17 @@ burgerMenu.addEventListener("click", function () {
     overlay.classList.remove("overlay");
     main.style.zIndex = "";
     footer.style.zIndex = "";
-    body.style.position = "";
+    body.style.overflow = "";
+    fullscreen.style.backgroundColor = "";
+    fullscreen.style.opacity = "";
   } else {
     burgerMenu.classList.add("close");
     overlay.classList.add("overlay");
     main.style.zIndex = "-1";
     footer.style.zIndex = "-2";
-    body.style.position = "fixed";
+    body.style.overflow = "hidden";
+    fullscreen.style.backgroundColor = "black";
+    fullscreen.style.opacity = "0.5";
   }
 });
 
@@ -88,3 +93,16 @@ for (let i = 0; i < questionBox.length; i++) {
     }
   });
 }
+
+//scrolling
+
+let backScrollPos = window.pageYOffset;
+window.onscroll = function () {
+  const currentPos = window.pageYOffset;
+  if (backScrollPos > currentPos) {
+    header.style.top = "0";
+  } else {
+    header.style.top = `-${header.offsetHeight}px`;
+  }
+  backScrollPos = currentPos;
+};
