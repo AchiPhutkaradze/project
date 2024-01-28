@@ -2,8 +2,8 @@
 
 ## Roadmap
 
-- [Project Structure](#ProjectStructure)
-- [run project](#Instructionforruntheproject)
+- [Project Structure](#Project-Structure)
+- [run project](#Instruction-for-run-the-project)
 - [Author](#author)
 
 # Project Structure
@@ -14,12 +14,12 @@
 
 In the HTML file, I've utilized the following main tags:
 
-- <nav>
-- <header>
-- <main>
-- <section>
-- <footer>
-- <div>
+- nav
+- header
+- main
+- section
+- footer
+- div
 
 ### Classes and IDs:
 
