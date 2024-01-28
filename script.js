@@ -14,38 +14,66 @@ const footer = document.querySelector("footer");
 const body = document.getElementsByTagName("BODY")[0];
 const header = document.querySelector("header");
 const fullscreen = document.getElementById("fullscreen");
+const mediaQuery = window.matchMedia("(max-width: 1024px)");
+const prevBtn = document.getElementById("left-arrow");
+const nextBtn = document.getElementById("right-arrow");
 
 //menu
-burgerMenu.addEventListener("click", function () {
-  const isClosed = burgerMenu.classList.contains("close");
+function menu() {
+  burgerMenu.addEventListener("click", function () {
+    const isClosed = burgerMenu.classList.contains("close");
 
-  if (isClosed) {
-    burgerMenu.classList.remove("close");
-    overlay.classList.remove("overlay");
-    main.style.zIndex = "";
-    footer.style.zIndex = "";
-    body.style.overflow = "";
-    fullscreen.style.backgroundColor = "";
-    fullscreen.style.opacity = "";
-  } else {
-    burgerMenu.classList.add("close");
-    overlay.classList.add("overlay");
-    main.style.zIndex = "-1";
-    footer.style.zIndex = "-2";
-    body.style.overflow = "hidden";
-    fullscreen.style.backgroundColor = "black";
-    fullscreen.style.opacity = "0.5";
-  }
-});
+    if (isClosed) {
+      burgerMenu.classList.remove("close");
+      overlay.classList.remove("overlay");
+      main.style.zIndex = "";
+      footer.style.zIndex = "";
+      body.style.overflow = "";
+      fullscreen.style.backgroundColor = "";
+      fullscreen.style.opacity = "";
+    } else {
+      burgerMenu.classList.add("close");
+      overlay.classList.add("overlay");
+      main.style.zIndex = "-1";
+      footer.style.zIndex = "-2";
+      body.style.overflow = "hidden";
+      fullscreen.style.backgroundColor = "black";
+      fullscreen.style.opacity = "0.5";
+    }
+  });
+}
+menu();
 
 //slideshow
 
 const showSlide = (index) => {
-  count = index < 0 ? slidesLength - 1 : index >= slidesLength ? 0 : index;
-  slider.style.transform = `translateX(${-count * 100}%)`;
+  const mobileVersion = () => {
+    count = index < 0 ? slidesLength - 1 : index >= slidesLength ? 0 : index;
+    slider.style.transform = `translateX(${-count * 100}%)`;
+  };
+
+  const desktopVersion = () => {
+    slides.forEach((slide) => slide.classList.remove("active"));
+    count = index < 0 ? slidesLength - 1 : index >= slidesLength ? 0 : index;
+    slides[count].classList.add("active");
+  };
+
+  const changebi = (event) => {
+    if (event.matches) {
+      mobileVersion();
+    } else {
+      desktopVersion();
+    }
+  };
+
+  changebi(mediaQuery);
+  mediaQuery.addListener(changebi);
+
+  changebi();
 };
 
 const createRadioButtons = () => {
+  const radioContainer = document.querySelector(".radio-container");
   for (let i = 0; i < slidesLength; i++) {
     const radioBtn = document.createElement("div");
     radioBtn.className = "radio-btn";
@@ -70,11 +98,25 @@ const updateRadioButtons = () => {
   radios.forEach((radio, index) => (radio.checked = index === count));
 };
 
-createRadioButtons();
-startAutoPlay();
+const updateArrowVisibility = () => {
+  prevBtn.style.display = count === 0 ? "" : "block";
+  nextBtn.style.display = count === slidesLength - 1 ? "none" : "block";
+};
+
+prevBtn.addEventListener("click", () => {
+  showSlide(count - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+  showSlide(count + 1);
+});
 
 slider.addEventListener("mouseenter", stopAutoPlay);
 slider.addEventListener("mouseleave", startAutoPlay);
+
+createRadioButtons();
+startAutoPlay();
+updateArrowVisibility();
 
 //fac accordion
 for (let i = 0; i < questionBox.length; i++) {
@@ -97,7 +139,7 @@ for (let i = 0; i < questionBox.length; i++) {
 //scrolling
 
 let backScrollPos = window.pageYOffset;
-window.onscroll = function () {
+function scrolling() {
   const currentPos = window.pageYOffset;
   if (backScrollPos > currentPos) {
     header.style.top = "0";
@@ -105,4 +147,16 @@ window.onscroll = function () {
     header.style.top = `-${header.offsetHeight}px`;
   }
   backScrollPos = currentPos;
-};
+}
+
+//media query
+
+function handleViewportChange(event) {
+  if (event.matches) {
+    window.onscroll = scrolling;
+  } else {
+    window.onscroll = null;
+  }
+}
+handleViewportChange(mediaQuery);
+mediaQuery.addListener(handleViewportChange);
