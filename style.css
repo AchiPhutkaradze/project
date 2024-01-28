@@ -684,12 +684,14 @@ h6 {
     position: absolute;
     left: 100px;
     display: block;
+    cursor: pointer;
   }
   #right-arrow {
     position: absolute;
     right: 100px;
     transform: rotate(180deg);
     display: block;
+    cursor: pointer;
   }
   .questions-div {
     position: relative;
@@ -708,6 +710,7 @@ h6 {
   .fac-title span {
     font-size: 20px;
     color: #00aeef;
+    cursor: pointer;
   }
   #footer-tbc-logo {
     width: 107px;
@@ -732,6 +735,9 @@ h6 {
   .social {
     justify-content: end;
   }
+  .social img {
+    cursor: pointer;
+  }
   .fac-list {
     gap: 22px;
   }
@@ -747,5 +753,9 @@ h6 {
   }
   #write-us {
     width: 162px;
+    cursor: pointer;
+  }
+  .fac-item {
+    cursor: pointer;
   }
 }
