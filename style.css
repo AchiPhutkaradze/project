@@ -127,10 +127,14 @@ header {
   a {
     color: #fff;
     display: block;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 20px;
+    margin-bottom: 50px;
     text-decoration: none;
   }
+}
+.nav-list {
+  position: absolute;
+  right: 10px;
 }
 
 .site-logo {
@@ -452,7 +456,7 @@ hr {
 
 footer {
   background-color: #1a1e1f;
-  padding: 32px 0 43px 37px;
+  padding: 32px 30px 43px 37px;
 }
 #footer-tbc-logo {
   width: 31%;
@@ -485,6 +489,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 11px;
+  align-items: end;
 }
 .rules span {
   color: white;
@@ -508,6 +513,14 @@ h6 {
 .desktop-version-footer-div {
   display: none;
 }
+
+#left-arrow {
+  display: none;
+}
+#right-arrow {
+  display: none;
+}
+
 @media screen and (min-width: 1024px) {
   #people {
     display: none;
@@ -515,6 +528,7 @@ h6 {
   #people-desk {
     display: block;
     width: 100%;
+    min-height: 352px;
   }
   header {
     height: 84px;
@@ -544,6 +558,7 @@ h6 {
   .nav-list {
     display: flex;
     gap: 44px;
+    position: relative;
   }
 
   li {
@@ -582,7 +597,7 @@ h6 {
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 12.5px;
+    row-gap: 22.5px;
     column-gap: 40px;
     margin-top: 67px;
   }
@@ -601,7 +616,7 @@ h6 {
     margin: 96px 0px 10px calc((100% - 980px) * 0.5);
   }
   .describe {
-    padding: 56px calc((100% - 980px) * 0.5) 43px calc((100% - 980px) * 0.5);
+    padding: 56px calc((100% - 810px) * 0.5) 43px calc((100% - 1013px) * 0.5);
   }
   .letter {
     font-size: 28px;
@@ -668,11 +683,13 @@ h6 {
   #left-arrow {
     position: absolute;
     left: 100px;
+    display: block;
   }
   #right-arrow {
     position: absolute;
     right: 100px;
     transform: rotate(180deg);
+    display: block;
   }
   .questions-div {
     position: relative;
@@ -710,11 +727,25 @@ h6 {
   .contact {
     flex-direction: column;
     gap: 35px;
+    padding: 0;
   }
   .social {
     justify-content: end;
   }
   .fac-list {
     gap: 22px;
+  }
+  .slider {
+    transform: translateX(0%);
+    transition: none;
+  }
+  .details {
+    padding-top: 94px;
+  }
+  .course-name {
+    gap: 24px;
+  }
+  #write-us {
+    width: 162px;
   }
 }

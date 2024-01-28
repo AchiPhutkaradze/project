@@ -15,8 +15,8 @@ const body = document.getElementsByTagName("BODY")[0];
 const header = document.querySelector("header");
 const fullscreen = document.getElementById("fullscreen");
 const mediaQuery = window.matchMedia("(max-width: 1024px)");
-const prevBtn = document.getElementById("left-arrow");
-const nextBtn = document.getElementById("right-arrow");
+const arrowPrev = document.getElementById("left-arrow");
+const arrowNext = document.getElementById("right-arrow");
 
 //menu
 function menu() {
@@ -45,79 +45,66 @@ function menu() {
 menu();
 
 //slideshow
-
-const showSlide = (index) => {
-  const mobileVersion = () => {
+document.addEventListener("DOMContentLoaded", function () {
+  const showSlide = (index) => {
     count = index < 0 ? slidesLength - 1 : index >= slidesLength ? 0 : index;
-    slider.style.transform = `translateX(${-count * 100}%)`;
+    const desktopVersion = () => {
+      slides.forEach((slide) => slide.classList.remove("active"));
+      slides[count].classList.add("active");
+    };
+    const mobileVersion = () => {
+      slider.style.transform = `translateX(${-count * 100}%)`;
+    };
+
+    const changes = (event) => {
+      if (event.matches) {
+        mobileVersion();
+      } else {
+        slider.style.transform = "translateX(0)";
+        desktopVersion();
+      }
+    };
+
+    changes(mediaQuery);
+    mediaQuery.addListener(changes);
   };
 
-  const desktopVersion = () => {
-    slides.forEach((slide) => slide.classList.remove("active"));
-    count = index < 0 ? slidesLength - 1 : index >= slidesLength ? 0 : index;
-    slides[count].classList.add("active");
-  };
+  showSlide(0);
 
-  const changebi = (event) => {
-    if (event.matches) {
-      mobileVersion();
-    } else {
-      desktopVersion();
+  const createRadioButtons = () => {
+    const radioContainer = document.querySelector(".radio-container");
+    for (let i = 0; i < slidesLength; i++) {
+      const radioBtn = document.createElement("div");
+      radioBtn.className = "radio-btn";
+      radioBtn.innerHTML = `<input type="radio" name="slider-radio" id="radio${i}" />
+                          <label for="radio${i}"></label>`;
+      radioBtn.addEventListener("click", () => showSlide(i));
+      radioContainer.appendChild(radioBtn);
     }
   };
 
-  changebi(mediaQuery);
-  mediaQuery.addListener(changebi);
+  const startAutoPlay = () => {
+    autoPlay = setInterval(() => {
+      showSlide(count + 1);
+      updateRadioButtons();
+    }, 4000);
+  };
 
-  changebi();
-};
+  const stopAutoPlay = () => clearInterval(autoPlay);
 
-const createRadioButtons = () => {
-  const radioContainer = document.querySelector(".radio-container");
-  for (let i = 0; i < slidesLength; i++) {
-    const radioBtn = document.createElement("div");
-    radioBtn.className = "radio-btn";
-    radioBtn.innerHTML = `<input type="radio" name="slider-radio" id="radio${i}" />
-                          <label for="radio${i}"></label>`;
-    radioBtn.addEventListener("click", () => showSlide(i));
-    radioContainer.appendChild(radioBtn);
-  }
-};
+  const updateRadioButtons = () => {
+    const radios = document.querySelectorAll(".radio-btn input");
+    radios.forEach((radio, index) => (radio.checked = index === count));
+  };
 
-const startAutoPlay = () => {
-  autoPlay = setInterval(() => {
-    showSlide(count + 1);
-    updateRadioButtons();
-  }, 4000);
-};
+  arrowNext.addEventListener("click", () => showSlide(count - 1));
+  arrowPrev.addEventListener("click", () => showSlide(count + 1));
+  slider.addEventListener("mouseenter", stopAutoPlay);
+  slider.addEventListener("mouseleave", startAutoPlay);
 
-const stopAutoPlay = () => clearInterval(autoPlay);
-
-const updateRadioButtons = () => {
-  const radios = document.querySelectorAll(".radio-btn input");
-  radios.forEach((radio, index) => (radio.checked = index === count));
-};
-
-const updateArrowVisibility = () => {
-  prevBtn.style.display = count === 0 ? "" : "block";
-  nextBtn.style.display = count === slidesLength - 1 ? "none" : "block";
-};
-
-prevBtn.addEventListener("click", () => {
-  showSlide(count - 1);
+  createRadioButtons();
+  startAutoPlay();
 });
-
-nextBtn.addEventListener("click", () => {
-  showSlide(count + 1);
-});
-
-slider.addEventListener("mouseenter", stopAutoPlay);
-slider.addEventListener("mouseleave", startAutoPlay);
-
-createRadioButtons();
-startAutoPlay();
-updateArrowVisibility();
-
 //fac accordion
 for (let i = 0; i < questionBox.length; i++) {
   questionBox[i].addEventListener("click", function () {
@@ -151,12 +138,29 @@ function scrolling() {
 
 //media query
 
-function handleViewportChange(event) {
-  if (event.matches) {
-    window.onscroll = scrolling;
+function headerOpacity(header) {
+  const currentPosition = window.pageYOffset;
+  if (currentPosition > 100) {
+    header.style.opacity = "0.95";
   } else {
-    window.onscroll = null;
+    header.style.opacity = "1";
   }
 }
+
+function scrolling() {
+  headerOpacity(header);
+}
+
+function handleViewportChange(event) {
+  if (event.matches) {
+    window.addEventListener("scroll", scrolling);
+    headerOpacity(header);
+  } else {
+    window.removeEventListener("scroll", scrolling);
+    headerOpacity(header);
+    header.style.opacity = "1";
+  }
+}
+
 handleViewportChange(mediaQuery);
 mediaQuery.addListener(handleViewportChange);
