@@ -124,27 +124,24 @@ for (let i = 0; i < questionBox.length; i++) {
 }
 
 //scrolling
-
-let backScrollPos = window.pageYOffset;
-function scrolling() {
-  const currentPos = window.pageYOffset;
-  if (backScrollPos > currentPos) {
-    header.style.top = "0";
-  } else {
-    header.style.top = `-${header.offsetHeight}px`;
-  }
-  backScrollPos = currentPos;
-}
-
-//media query
-
 function headerOpacity(header) {
   const currentPosition = window.pageYOffset;
+  let backScrollPos = header.lastScrollPos || currentPosition + 1;
+
   if (currentPosition > 100) {
     header.style.opacity = "0.95";
   } else {
     header.style.opacity = "1";
   }
+
+  if (backScrollPos > currentPosition) {
+    header.style.top = "0";
+  } else {
+    header.style.top = `-${header.offsetHeight}px`;
+  }
+
+  header.lastScrollPos = currentPosition;
+  console.log(backScrollPos > currentPosition);
 }
 
 function scrolling() {
