@@ -132,6 +132,9 @@ header {
     text-decoration: none;
   }
 }
+#tbc-usaid-link span {
+  color: rgb(0, 163, 224);
+}
 .nav-list {
   position: absolute;
   right: 10px;
@@ -520,6 +523,9 @@ h6 {
 #right-arrow {
   display: none;
 }
+.fac-title span {
+  display: none;
+}
 
 @media screen and (min-width: 1024px) {
   #people {
@@ -757,5 +763,8 @@ h6 {
   }
   .fac-item {
     cursor: pointer;
+  }
+  .fac-title span {
+    display: none;
   }
 }
